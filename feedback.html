@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+	<meta charset="UTF-8">
+	<title>GoGreen</title> 
+
+	<!-- to make mobile responsive -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link rel="stylesheet" href="./public/css/responsive.css">
+	<link rel="stylesheet" href="./public/css/style.css">
+
+	<link rel="apple-touch-icon" sizes="180x180" href="./public/images/fav-icon/apple-touch-icon.png">
+	<link rel="icon" type="image/png" href="./public/images/fav-icon/favicon-32x32.png" sizes="32x32">
+	<link rel="icon" type="image/png" href="./public/images/fav-icon/favicon-16x16.png" sizes="16x16">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+ 
+
+</head>
+<style>
+    .dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+ .dropdown-content {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 200px;
+    padding: 10px 10px;
+    z-index: 20;
+}
+
+.dropdown-content a{
+    color: black;
+    text-decoration: none;
+    height: 34px;
+    font-size: medium;
+    width: 100%;
+    text-align: start;
+}
+.dropdown-content a:hover{
+    background-color: rgb(145, 209, 145);
+    color: white;
+}
+.popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+.popup.show {
+  display: block;
+}
+
+</style>
+<style>
+    .rating {
+    font-size: 2rem;
+    cursor: pointer;
+  
+}
+
+.star {
+    color: lightgray;
+    margin: 0 5px;
+    font-size: 6rem;
+}
+
+
+.star.active {
+    color: gold;
+}
+.alert {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  font-size: 18px;
+  z-index: 1000;
+}
+.ratingP{
+    color: white !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.ratingP p{
+    color: #fff;
+}
+.full-star {
+  color: yellow;
+}
+
+.half-star {
+  color: yellow;
+}
+
+</style>
+
+<body>
+
+<div class="boxed_wrapper">
+
+
+<section class="theme_menu stricky">
+    <div class="container">
+        <div class="row" id="c">
+            <div class="col-md-3">
+                <div class="main-logo">
+                    <a href="/"><img src="./public/images/logoo.png" alt=""></a>
+                </div>
+            </div>
+            <div class="col-md-9 menu-column">
+                <nav class="menuzord" id="main_menu">
+                  <ul class="menuzord-menu">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/about">About Us</a></li>
+                    <li id="register"><a href="/register">Register</a></li>
+                    <li id="login"><a href="/login">Login</a></li>
+                    <li><a href="/volunteer">Volunteer</a></li>
+                    <li id="profile" style="display: none;"><a href="/profile">Profile</a></li>
+                    <li><a href="/feedback">Feedback</a></li>
+                    <li><a href="/faq">FAQ</a></li>
+                    <!-- <li id="profileicon"class="profile_icon" style="display: none;"><a href=""><i class="bi bi-person"></i></a></li>
+
+                        <div class="popup" style="width: 159px;display: none;  position: fixed; left: 87%; background-color: white; padding: 10px 20px; top: 76px;">
+                        <button id="logoutBtn" style="outline: none; border:none;">Log Out</button>
+                        <button class="close" style="border-radius: 50px;
+                        border: 2px solid white;
+                        padding: 0px 5px;
+                        background-color: white;
+                        font-weight: 700;
+                        color: black;
+                        opacity: 1;
+                        position: absolute;
+                        top: -11px;
+                        right: -8px; ">X</button>
+                        </div> -->
+                   </ul>
+                </nav> 
+            </div>
+            <div class="right-column">
+                <div class="right-area">
+                    <div class="nav_side_content">
+                   </div>
+                </div>
+                    
+            </div>
+
+
+        </div>
+                
+
+   </div>
+</section>
+
+
+ 
+
+<div class="inner-banner has-base-color-overlay text-center" style="background-color: #143601;">
+    <div class="container">
+        <div class="box" style="top:161px;">
+            <div>
+            
+            <p class="feedCon"> Your Feedback Shapes Green Riyadh</p>
+            <h4 class="feedCon2">Help us improve our efforts in environmental conservation and community engagement.</h4>
+           
+            
+            <h2 class="feedCon3">How would you rate your overall experience with Go Green?</h2>
+            <div class="rating" id="rating">
+                <span class="star" data-value="1">&#9733;</span>
+                <span class="star" data-value="2">&#9733;</span>
+                <span class="star" data-value="3">&#9733;</span>
+                <span class="star" data-value="4">&#9733;</span>
+                <span class="star" data-value="5">&#9733;</span>
+            </div>            
+        </div>
+        </div>
+        
+    </div>
+</div>
+
+
+ 
+</div>
+<div class="container-fluid" style="background-color: #0a1b00;">
+    <form method="post" action="/feedback">
+<div class="container">
+<div class="row">
+            <div class="col-md-12 col-lg-6">
+            
+                        <div class="form-group">
+                            <span class="adon-icon"><span class="labal">Name</span></span>
+                            <input type="text" name="name" value="" placeholder="Your Name *" class="ipt" required>
+                        </div>
+                        <div class="form-group">
+                            <span class="adon-icon"><span class="labal">Phone Number</span></span>
+                            <input type="number" name="phone" value="" placeholder="00965555555555 *" class="ipt" required>
+                            <input type="hidden" name="rate" id="selectedRating">
+                        </div>
+                        <div class="form-group">
+                            <span class="adon-icon"><span class="labal">Type of Feedback</span></span>
+                              	<div>
+                    			
+                    			<select  class="input-drop">
+                    				<option>Volunteering Activities</option>
+                            <option>Website Usability</option>
+                            <option>Other</option>
+
+                    			</select>
+                    		</div>
+                        
+                        
+                       </div>
+                   
+                    </div>
+            <div class="col-md-12 col-lg-6">
+                        <div class="form-group">
+                            <span class="adon-icon"><span class="labal">Please share your thoughts, experiences, or suggestions about out initiatives. Your feedback is vital in helping us improve.</span></span>
+                           
+                            <input type="text" name="feed" value="" placeholder="Text" class="ipt2" required>
+                        </div>
+            </div>
+           
+        </div>
+         <div style="display: flex; justify-content: center; margin-top: 20px;">                       
+            <div class="clearfix">
+             <div class="form-group pull-left">
+                <button type="submit" class="thm-btn thm-tran-bg">Submit</button>
+            </div>
+            </div>
+            
+        </div>
+    </div>
+</form>
+
+
+<ul id="feedbackList"></ul>
+
+<div style="height: 150px; width: 100%; margin-top: 50px;">
+
+    <div id="feedbackCarousel" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner" id="feedbackCarouselInner">
+          <!-- Feedback items will be dynamically added here -->
+        </div>
+        <a class="carousel-control-prev" href="#feedbackCarousel" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#feedbackCarousel" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+</div>
+
+<div class="border-bottom"></div>
+
+
+
+
+
+
+<!--Footer Bottom-->
+
+    <!-- Scroll Top  -->
+    <button class="scroll-top tran3s color2_bg"><span class="fa fa-angle-up"></span></button>
+    <!-- preloader  -->
+    <div class="preloader"></div>
+    <script>
+      let popupbut = document.querySelector(".profile_icon");
+      let popup = document.querySelector(".popup");
+      let close = document.querySelector(".close");
+
+      popupbut.addEventListener("click",(e)=>{
+          e.preventDefault();
+          popup.style.display= "block";
+      })
+      close.addEventListener("click",(e)=>{
+          e.preventDefault();
+          popup.style.display= "none";
+      })
+      
+  </script>
+  <script>
+      $(document).ready(function () {
+          $("#logoutBtn").on("click", function () {
+              // Send a log-out request to the server
+              $.ajax({
+                  type: 'GET',
+                  url: '/logout',
+                  success: function () {
+                      // Redirect to the login page after successful log-out
+                      window.location.href = '/login';
+                  },
+                  error: function (error) {
+                      console.error('Error during log-out:', error);
+                  }
+              });
+          });
+      });
+  </script>
+       <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+  // Fetch user details from the server
+  $(document).ready(function () {
+      $.ajax({
+          type: 'GET',
+          url: '/api/user-details', 
+          success: function (data) {
+            
+              const createdAt = new Date(data.createdAt);
+              const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true };
+
+              const formattedDateTime = createdAt.toLocaleDateString('en-US', options);
+              const registerheader = document.getElementById('register');
+              const loginheader = document.getElementById('login') ;
+              const profileheader = document.getElementById('profile') ;
+              const profileicon = document.getElementById('profileicon') ;
+              registerheader.style.display = "none";
+              loginheader.style.display = "none";
+              profileheader.style.display = "block";
+              profileicon.style.display = "block";
+
+              $('#username').text('Username: '+ data.name);
+              $('#name').text(data.name);
+              $('#email').text('Email Address: ' + data.email);
+              $('#create').text('First access to site: ' + formattedDateTime);
+              $('#update').text('Last access to site: ' + 'Recently');
+          },
+          error: function (error) {
+              console.error('Error fetching user details:', error);
+          }
+      });
+  });
+</script>
+
+    
+
+
+   <!-- jQuery -->
+   <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const ratingContainer = document.getElementById("rating");
+      const selectedRating = document.getElementById("selectedRating");
+  
+      let currentRating = 0;
+  
+      ratingContainer.addEventListener("click", function (event) {
+        const star = event.target;
+        if (star.classList.contains("star")) {
+          const value = parseInt(star.getAttribute("data-value"));
+  
+          // Toggle the active class for selected and deselected stars
+          for (let i = 1; i <= 5; i++) {
+            const starElement = ratingContainer.querySelector(`[data-value="${i}"]`);
+            if (i <= value) {
+              starElement.classList.add("active");
+            } else {
+              starElement.classList.remove("active");
+            }
+          }
+  
+          currentRating = value;
+          // Update the value of the hidden input field
+          selectedRating.value = currentRating;
+        }
+      });
+    });
+  </script>
+<!-- Your HTML code -->
+
+  
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+   <script src="./public/js/jquery.js"></script>
+   <script src="./public/js/bootstrap.min.js"></script>
+   <script src="./public/js/menu.js"></script>
+   <script src="./public/js/owl.carousel.min.js"></script>
+   <script src="./public/js/jquery.mixitup.min.js"></script>
+   <script src="./public/js/jquery.fancybox.pack.js"></script>
+   <script src="./public/js/imagezoom.js"></script> 
+   <script src="./public/js/jquery.magnific-popup.min.js"></script> 
+   <script src="./public/js/jquery.polyglot.language.switcher.js"></script>
+   <script src="./public/js/SmoothScroll.js"></script>
+   <script src="./public/js/jquery.appear.js"></script>
+   <script src="./public/js/jquery.countTo.js"></script>
+   <script src="./public/js/validation.js"></script> 
+   <script src="./public/js/wow.js"></script> 
+   <script src="./public/js/jquery.fitvids.js"></script> 
+   <script src="./public/js/nouislider.js"></script> 
+   <script src="./public/js/isotope.js"></script> 
+   <script src="./public/js/pie-chart.js"></script>
+   <script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const ratingContainer = document.getElementById("rating");
+    const selectedRating = document.getElementById("selectedRating");
+
+    let currentRating = 0;
+
+    ratingContainer.addEventListener("click", function (event) {
+        const star = event.target;
+        if (star.classList.contains("star")) {
+            const value = parseInt(star.getAttribute("data-value"));
+
+            // Toggle the active class for selected and deselected stars
+            for (let i = 1; i <= 5; i++) {
+                const starElement = ratingContainer.querySelector(`[data-value="${i}"]`);
+                if (i <= value) {
+                    starElement.classList.add("active");
+                } else {
+                    starElement.classList.remove("active");
+                }
+            }
+
+            currentRating = value;
+            selectedRating.textContent = `Selected Rating: ${currentRating}`;
+        }
+    });
+});
+
+</script>
+<!-- Your HTML code -->
+<!-- Your HTML code -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const urlParams = new URLSearchParams(window.location.search);
+      const successParam = urlParams.get('success');
+  
+      // Check if the "success" query parameter is present and display an alert if true
+      if (successParam === 'true') {
+        showAlert('Feedback submitted successfully.');
+      }
+    });
+  
+    function showAlert(message) {
+      const alertDiv = document.createElement('div');
+      alertDiv.className = 'alert';
+      alertDiv.textContent = message;
+  
+      document.body.appendChild(alertDiv);
+  
+      setTimeout(() => {
+        alertDiv.remove();
+      }, 5000);
+    }
+  </script>
+  
+  
+
+
+   <!-- revolution slider js -->
+   <script src="./public/js/rev-slider/jquery.themepunch.tools.min.js"></script>
+   <script src="./public/js/rev-slider/jquery.themepunch.revolution.min.js"></script>
+   <script src="./public/js/rev-slider/revolution.extension.actions.min.js"></script>
+   <script src="./public/js/rev-slider/revolution.extension.carousel.min.js"></script>
+   <script src="./public/js/rev-slider/revolution.extension.kenburn.min.js"></script>
+   <script src="./public/js/rev-slider/revolution.extension.layeranimation.min.js"></script>
+   <script src="./public/js/rev-slider/revolution.extension.migration.min.js"></script>
+   <script src="./public/js/rev-slider/revolution.extension.navigation.min.js"></script>
+   <script src="./public/js/rev-slider/revolution.extension.parallax.min.js"></script>
+   <script src="./public/js/rev-slider/revolution.extension.slideanims.min.js"></script>
+   <script src="./public/js/rev-slider/revolution.extension.video.min.js"></script>
+
+
+   <script src="./public/js/custom.js"></script>
+   <script>
+    document.addEventListener('DOMContentLoaded', async function () {
+      try {
+        // Make a GET request to fetch feedback details
+        const response = await fetch('/feedback-details');
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+  
+        // Parse the JSON response
+        const feedbackDetails = await response.json();
+  
+        // Update the HTML carousel to display feedback details
+        const feedbackCarouselInner = document.getElementById('feedbackCarouselInner');
+  
+        feedbackDetails.forEach((feedback, index) => {
+          const carouselItem = document.createElement('div');
+          carouselItem.className = `carousel-item ${index === 0 ? 'active' : ''}`;
+  
+          const feedbackContent = document.createElement('p');
+          feedbackContent.classList.add('ratingP'); 
+          feedbackContent.innerHTML = `<p> Name :   ${feedback.name} </p> <p> Feedback :   ${feedback.feed} </p>  <p>  Rating :   ${getStarRating(feedback.rate)} </p> `;
+  
+          carouselItem.appendChild(feedbackContent);
+          feedbackCarouselInner.appendChild(carouselItem);
+        });
+  
+      } catch (error) {
+        console.error('Error fetching feedback details:', error.message);
+        alert('Error fetching feedback details. Please try again later.');
+      }
+    });
+  
+    // Function to get star rating based on the provided rate
+    function getStarRating(rate) {
+      const maxStars = 5;
+      const fullStars = Math.floor(rate);
+      const halfStar = rate % 1 !== 0;
+      
+      let stars = '';
+
+for (let i = 0; i < fullStars; i++) {
+  stars += '<span class="full-star">★</span>'; // Full star with yellow color
+}
+
+if (halfStar) {
+  stars += '<span class="half-star">★</span>'; // Half star with yellow color
+}
+
+const emptyStars = maxStars - fullStars - (halfStar ? 1 : 0);
+for (let i = 0; i < emptyStars; i++) {
+  stars += '<span class="empty-star">☆</span>'; // Empty star with default color
+}
+
+return stars;
+    }
+  </script>
+
+   
+
+</div>
+    
+</body>
+
+
+</html>
